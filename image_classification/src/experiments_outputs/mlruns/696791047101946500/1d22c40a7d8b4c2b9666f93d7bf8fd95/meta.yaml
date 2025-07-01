@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Niranjan/Desktop/Modelzoo-project/VISTA/stm32ai-modelzoo-services/image_classification/src/experiments_outputs/mlruns/696791047101946500/1d22c40a7d8b4c2b9666f93d7bf8fd95/artifacts
+end_time: 1751265503336
+entry_point_name: ''
+experiment_id: '696791047101946500'
+lifecycle_stage: active
+run_id: 1d22c40a7d8b4c2b9666f93d7bf8fd95
+run_name: '2025_06_30_12_01_05'
+run_uuid: 1d22c40a7d8b4c2b9666f93d7bf8fd95
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751265068069
+status: 3
+tags: []
+user_id: Niranjan

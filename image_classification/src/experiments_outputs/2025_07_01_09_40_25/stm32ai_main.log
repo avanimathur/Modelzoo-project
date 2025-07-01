@@ -1,0 +1,19 @@
+operation_mode: chain_tqeb
+Model name : mobilenet
+Pretrained weights : imagenet
+Dataset : Vegetable_Images
+The last epoch history :
+['epoch', 'accuracy', 'loss', 'lr', 'val_accuracy', 'val_loss']
+['46', '0.9872727394104004', '0.042172349989414215', '0.001', '0.9959090948104858', '0.009892923757433891']
+Training runtime : 18689 s
+Average time per epoch : 397.64 s
+Float model validation_set:
+Accuracy of float model : 99.91 %
+Loss of float model : 0.0 
+Float model test_set:
+Accuracy of float model : 99.64 %
+Loss of float model : 0.01 
+Quantized model test_set:
+Accuracy of quantized model : 99.73 %
+Stm32ai version : 10.1.0
+Benchmarking board : STM32H747I-DISCO

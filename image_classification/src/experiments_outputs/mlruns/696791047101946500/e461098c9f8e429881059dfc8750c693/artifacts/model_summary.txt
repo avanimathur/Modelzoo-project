@@ -1,0 +1,17 @@
+Model: "augmented_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ rescaling (Rescaling)       (None, 128, 128, 3)       0         
+                                                                 
+ data_augmentation_layer (Da  (None, 128, 128, 3)      4         
+ taAugmentationLayer)                                            
+                                                                 
+ mobilenet_v2_alpha_0.35 (Fu  (None, 15)               429423    
+ nctional)                                                       
+                                                                 
+=================================================================
+Total params: 429,427
+Trainable params: 415,343
+Non-trainable params: 14,084
+_________________________________________________________________

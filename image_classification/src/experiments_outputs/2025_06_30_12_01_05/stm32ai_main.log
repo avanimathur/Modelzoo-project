@@ -1,0 +1,4 @@
+operation_mode: chain_tqeb
+Model name : mobilenet
+Pretrained weights : imagenet
+Dataset : Vegetable_Images

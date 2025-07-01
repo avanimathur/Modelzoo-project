@@ -1,0 +1,9 @@
+operation_mode: chain_tqeb
+Model name : mobilenet
+Pretrained weights : imagenet
+Dataset : Vegetable_Images
+The last epoch history :
+['epoch', 'accuracy', 'loss', 'lr', 'val_accuracy', 'val_loss']
+['4', '0.9675333499908447', '0.10287147760391235', '0.001', '0.9903333187103271', '0.028763575479388237']
+Training runtime : 4792 s
+Average time per epoch : 958.4 s
