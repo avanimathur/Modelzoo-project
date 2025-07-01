@@ -1,0 +1,39 @@
+general:
+  model_path: C:\Users\Niranjan\Desktop\Modelzoo-project\VISTA\stm32ai-modelzoo-services\image_classification\src\experiments_outputs\2025_07_01_09_40_25\quantized_models\quantized_model.tflite
+operation_mode: deployment
+dataset:
+  class_names:
+  - bitter_gourd
+  - bottle_gourd
+  - brinjal
+  - broccoli
+  - cabbage
+  - capsicum
+  - cauliflower
+  - cucumber
+  - potato
+  - pumpkin
+  - tomato
+preprocessing:
+  resizing:
+    interpolation: bilinear
+    aspect_ratio: fit
+  color_mode: rgb
+tools:
+  stedgeai:
+    version: 10.0.0
+    optimization: balanced
+    on_cloud: true
+    path_to_stedgeai: C:/Users/Niranjan/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.1.0/Utilities/windows/stedgeai.exe
+  path_to_cubeIDE: C:/ST/STM32CubeIDE_1.18.1/STM32CubeIDE/stm32cubeide.exe
+deployment:
+  c_project_path: ../application_code/image_classification/STM32H7/
+  IDE: GCC
+  verbosity: 1
+  hardware_setup:
+    serie: STM32H7
+    board: STM32H747I-DISCO
+    input: CAMERA_INTERFACE_DCMI
+    output: DISPLAY_INTERFACE_USB
+mlflow:
+  uri: ./src/experiments_outputs/mlruns

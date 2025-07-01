@@ -1,0 +1,3 @@
+operation_mode: evaluation
+Quantized model test_set:
+Accuracy of quantized model : 99.55 %

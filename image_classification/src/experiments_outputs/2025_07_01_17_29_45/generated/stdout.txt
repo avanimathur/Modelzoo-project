@@ -1,0 +1,69 @@
+>>> stedgeai generate --model 0906e10a-238d-4489-97da-62f363111cbd.tflite --allocate-inputs --allocate-outputs --target stm32 --name network --workspace workspace --output output
+WARNING: --allocate-inputs is deprecated, as it is the default behavior now. Please use the option --no-inputs-allocation to allocate input buffers in the application
+WARNING: --allocate-outputs is deprecated, as it is the default behavior now. Please use the option --no-outputs-allocation to allocate output buffers in the application
+ST Edge AI Core v2.0.0-20049
+Creating c (debug) info json file network_c_info.json
+ Exec/report summary (generate)
+ -----------------------------------------------------------------------------------------------------------------------------------
+ model file         :   0906e10a-238d-4489-97da-62f363111cbd.tflite       
+ type               :   tflite                                                                                                      
+ c_name             :   network                                                                                                     
+ compression        :   lossless                                                                                                    
+ options            :   allocate-inputs, allocate-outputs                                                                           
+ optimization       :   balanced                                                                                                    
+ target/series      :   stm32                                                                                                       
+ workspace dir      :   workspace                                         
+ output dir         :   output                                            
+ model_fmt          :   sa/ua per tensor                                                                                            
+ model_name         :   node_0906e10a238d448997da62f363111cbd                                                                       
+ model_hash         :   0x6ff6623ce500740af973f01923526068                                                                          
+ params #           :   403,179 items (414.39 KiB)                                                                                  
+ -----------------------------------------------------------------------------------------------------------------------------------
+ input 1/1          :   'serving_default_input_10', uint8(1x128x128x3), 48.00 KBytes, QLinear(0.007843138,127,uint8), activations   
+ output 1/1         :   'conversion_70', f32(1x11), 44 Bytes, activations                                                           
+ macc               :   19,107,654                                                                                                  
+ weights (ro)       :   424,332 B (414.39 KiB) (1 segment) / -1,188,384(-73.7%) vs float model                                      
+ activations (rw)   :   229,888 B (224.50 KiB) (1 segment) *                                                                        
+ ram (total)        :   229,888 B (224.50 KiB) = 229,888 + 0 + 0                                                                    
+ -----------------------------------------------------------------------------------------------------------------------------------
+ (*) 'input'/'output' buffers can be used from the activations buffer
+Computing AI RT data/code size (target=stm32)..
+ Requested memory size by section - "stm32h7" target
+ ------------------------------ -------- --------- -------- ---------
+ module                             text    rodata     data       bss
+ ------------------------------ -------- --------- -------- ---------
+ network.o                         4,690    38,806   29,548     1,188
+ NetworkRuntime1000_CM7_GCC.a     34,448         0        0         0
+ network_data.o                       48        16       88         0
+ lib (toolchain)*                    996       624        0         0
+ ------------------------------ -------- --------- -------- ---------
+ RT total**                       40,182    39,446   29,636     1,188
+ ------------------------------ -------- --------- -------- ---------
+ weights                               0   424,336        0         0
+ activations                           0         0        0   229,888
+ io                                    0         0        0         0
+ ------------------------------ -------- --------- -------- ---------
+ TOTAL                            40,182   463,782   29,636   231,076
+ ------------------------------ -------- --------- -------- ---------
+ *  toolchain objects (libm/libgcc*)
+ ** RT AI runtime objects (kernels+infrastructure)
+  Summary - "stm32h7" target
+  ---------------------------------------------------
+               FLASH (ro)      %*   RAM (rw)       %
+  ---------------------------------------------------
+  RT total        109,264   20.5%     30,824   11.8%
+  ---------------------------------------------------
+  TOTAL           533,600            260,712
+  ---------------------------------------------------
+  *  rt/total
+ Generated files (7)
+ ----------------------------------------------------------------------------------------
+ network_data_params.h
+ network_data_params.c
+ network_data.h
+ network_data.c
+ network_config.h
+ network.h
+ network.c
+Creating txt report file network_generate_report.txt
+elapsed time (generate): 10.714s

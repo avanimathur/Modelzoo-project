@@ -1,13 +1,13 @@
 general:
   project_name: VISTA
-  model_path:
+  model_path: C:\Users\Niranjan\Desktop\Modelzoo-project\VISTA\stm32ai-modelzoo-services\image_classification\src\experiments_outputs\2025_07_01_09_40_25\quantized_models\quantized_model.tflite
   logs_dir: logs
   saved_models_dir: saved_models
   display_figures: True
   global_seed: 123
   gpu_memory_limit: 24
 
-operation_mode: chain_tqeb
+operation_mode: deployment
 #choices=['training' , 'evaluation', 'prediction', 'deployment', 'quantization', 'benchmarking',
 #        'chain_tqeb','chain_tqe','chain_eqe','chain_qb','chain_eqeb','chain_qd ']
 
@@ -114,7 +114,7 @@ tools:
   stedgeai:
     version: 10.1.0
     optimization: balanced
-    on_cloud: False
+    on_cloud: True
     path_to_stedgeai: C:/Users/Niranjan/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.1.0/Utilities/windows/stedgeai.exe
 
   path_to_cubeIDE: C:/ST/STM32CubeIDE_1.18.1/STM32CubeIDE/stm32cubeide.exe

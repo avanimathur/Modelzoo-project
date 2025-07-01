@@ -1,10 +1,19 @@
 general:
-   model_path: ../../stm32ai-modelzoo/image_classification/mobilenetv2/ST_pretrainedmodel_public_dataset/flowers/mobilenet_v2_0.35_128_fft/mobilenet_v2_0.35_128_fft.h5
+  model_path: C:\Users\Niranjan\Desktop\Modelzoo-project\VISTA\stm32ai-modelzoo-services\image_classification\src\experiments_outputs\2025_07_01_09_40_25\quantized_models\quantized_model.tflite
 
 operation_mode: evaluation
 
+evaluation:
+   target: host # host, stedgeai_host, stedgeai_n6
+
 dataset:
-   test_path: ./datasets/flower_photos_testset
+   name: Vegetable_Images
+   class_names: [  bitter_gourd, bottle_gourd, brinjal, broccoli, cabbage, capsicum, cauliflower, cucumber, potato, pumpkin, tomato ]                             
+   training_path: C:/Users/Niranjan/Desktop/Modelzoo-project/VISTA/stm32ai-modelzoo-services/image_classification/datasets/Vegetable_Images/train
+   validation_path: C:/Users/Niranjan/Desktop/Modelzoo-project/VISTA/stm32ai-modelzoo-services/image_classification/datasets/Vegetable_Images/validation
+   validation_split: 0.1
+   test_path: C:/Users/Niranjan/Desktop/Modelzoo-project/VISTA/stm32ai-modelzoo-services/image_classification/datasets/Vegetable_Images/test
+   check_image_files: False
 
 preprocessing:
    rescaling:
