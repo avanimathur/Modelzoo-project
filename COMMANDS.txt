@@ -1,0 +1,22 @@
+cd <Folder Location>\stm32ai-modelzoo-services\image_classification
+py -3.10 -m venv venv310
+venv310\Scripts\activate
+python.exe -m pip install --upgrade pip
+pip install -r <Folder Location>\stm32ai-modelzoo-services\requirements.txt
+pip install -r <Folder Location>\stm32ai-modelzoo-services\requirements.txt
+pip install hydra-core omegaconf mlflow tensorflow clearml much tabulate munch
+set HYDRA_FULL_ERROR=1
+python stm32ai_main.py
+
+
+To enable long path support in Windows :
+
+Press Win + R, type gpedit.msc, and press Enter. 
+Go to Computer Configuration > Administrative Templates > System > Filesystem
+Find and double-click "Enable Win32 long paths". Select "Enabled", click "Apply", then "OK". 
+Restart your computer for the changes to take effect. 
+
+Press Win + R, type regedit, and press Enter. 
+Navigate to the setting: Go to HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem. 
+Modify LongPathsEnabled: Find the LongPathsEnabled value (DWORD) and change its value to 1. If it doesn't exist, create it. 
+Restart: Restart your computer for the changes to take effect. 

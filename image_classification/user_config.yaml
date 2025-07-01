@@ -1,0 +1,140 @@
+general:
+  project_name: VISTA
+  model_path:
+  logs_dir: logs
+  saved_models_dir: saved_models
+  display_figures: True
+  global_seed: 123
+  gpu_memory_limit: 24
+
+operation_mode: chain_tqeb
+#choices=['training' , 'evaluation', 'prediction', 'deployment', 'quantization', 'benchmarking',
+#        'chain_tqeb','chain_tqe','chain_eqe','chain_qb','chain_eqeb','chain_qd ']
+
+dataset:
+  name: Vegetable_Images
+  class_names: [  bitter_gourd, bottle_gourd, brinjal, broccoli, cabbage, capsicum, cauliflower, cucumber, potato, pumpkin, tomato ]                             
+  training_path: C:/Users/Niranjan/Desktop/Modelzoo-project/VISTA/stm32ai-modelzoo-services/image_classification/datasets/Vegetable_Images/train
+  validation_path: C:/Users/Niranjan/Desktop/Modelzoo-project/VISTA/stm32ai-modelzoo-services/image_classification/datasets/Vegetable_Images/validation
+  validation_split: 0.1
+  test_path: C:/Users/Niranjan/Desktop/Modelzoo-project/VISTA/stm32ai-modelzoo-services/image_classification/datasets/Vegetable_Images/test
+  quantization_path: C:/Users/Niranjan/Desktop/Modelzoo-project/VISTA/stm32ai-modelzoo-services/image_classification/datasets/Vegetable_Images/validation 
+  quantization_split: 0.01
+  check_image_files: False  # Optional, set it to True if you want to check that all the image files can be read successfully
+  seed: 127               # Optional, there is a default seed
+
+preprocessing:
+  rescaling: { scale: 1/127.5, offset: -1 }
+  resizing:
+    interpolation: nearest
+    aspect_ratio: fit
+  color_mode: rgb
+
+data_augmentation:    # Optional section
+  random_contrast:
+    factor: 0.4
+  random_brightness:
+    factor: 0.05
+  random_flip:
+    mode: horizontal
+  random_translation:
+    width_factor: 0.25
+    height_factor: 0.25
+    fill_mode: reflect
+    interpolation: nearest
+  random_rotation:
+    factor: 0.125
+    fill_mode: reflect
+    interpolation: nearest
+  random_zoom:
+    width_factor: 0.25
+    height_factor: 0.25
+    fill_mode: reflect
+    interpolation: nearest
+  random_shear:
+    factor: 0.0515
+    fill_mode: wrap
+    interpolation: nearest
+#  random_gaussian_noise:
+#    stddev: (0.0001, 0.005)
+
+training:
+  model:    # Use it if you want to use a model from the zoo, mutually exclusive with 'general.model_path'
+    name: mobilenet
+    version: v2
+    alpha: 0.35
+    input_shape: (128, 128, 3)
+    pretrained_weights: imagenet   # Optional, use it if you want to use the 'imagenet' pretrained weights, available only for MobileNet models
+    pretrained_model_path:         # Optional, available for transfer learning with all models, mutually exclusive with pretrained_weights
+  resume_training_from: # Optional, use to resume a training from a previous experiment.
+                        # Example: experiments_outputs/2023_10_26_18_36_09/saved_models/last_augmented_model.h5 
+  frozen_layers: None  #(0:-1)            # Optional, use if you want to freeze some layers (by default all layers are trainable)
+  dropout: 0.3                     # Optional, use it if you want a dropout layer to be included in the model
+  batch_size: 64
+  epochs: 50
+  optimizer:
+    Adam:
+      learning_rate: 0.001
+  callbacks:          # Optional section
+    ReduceLROnPlateau:
+      monitor: val_accuracy
+      mode: max
+      factor: 0.5
+      patience: 15
+      min_lr: 1.0e-05
+    # LRWarmupCosineDecay:
+    #   initial_lr: 0.0001
+    #   warmup_steps: 100
+    #   max_lr: 0.005
+    #   hold_steps: 100
+    #   decay_steps: 800
+    #   end_lr: 5.0e-05
+    EarlyStopping:
+      monitor: val_accuracy
+      mode: max
+      restore_best_weights: true
+      patience: 15
+#  trained_model_path: trained.h5   # Optional, use it if you want to save the best model at the end of the training to a path of your choice
+
+quantization:
+  quantizer: TFlite_converter
+  quantization_type: PTQ
+  quantization_input_type: uint8
+  quantization_output_type: float
+  granularity: per_channel   #per_tensor
+  optimize: False   #can be True if per_tensor
+  export_dir: quantized_models
+
+# The prediction section is optional unless you set operation_mode to "prediction".
+# If you do so, the attribute test_files_path is mandatory.
+prediction:
+  test_files_path: C:/Users/Niranjan/Desktop/Modelzoo-project/VISTA/stm32ai-modelzoo-services/image_classification/datasets/Vegetable_Images/test
+
+tools:
+  stedgeai:
+    version: 10.1.0
+    optimization: balanced
+    on_cloud: False
+    path_to_stedgeai: C:/Users/Niranjan/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.1.0/Utilities/windows/stedgeai.exe
+
+  path_to_cubeIDE: C:/ST/STM32CubeIDE_1.18.1/STM32CubeIDE/stm32cubeide.exe
+
+benchmarking:
+  board: STM32H747I-DISCO
+
+deployment:
+  c_project_path: ../application_code/image_classification/STM32NH7
+  IDE: GCC
+  verbosity: 1
+  hardware_setup:
+    serie: STM32H7
+    board: STM32H747I-DISCO
+    input: CAMERA_INTERFACE_DCMI
+    output: DISPLAY_INTERFACE_USB
+
+mlflow:
+  uri: ./src/experiments_outputs/mlruns
+
+hydra:
+  run:
+    dir: ./src/experiments_outputs/${now:%Y_%m_%d_%H_%M_%S}
